@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -18,7 +19,6 @@ import (
 	appsv1alpha1 "github.com/amirhosssein0/simple-operator/api/v1alpha1"
 )
 
-// MiniAppReconciler reconciles a MiniApp object
 type MiniAppReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
@@ -32,6 +32,7 @@ type MiniAppReconciler struct {
 func (r *MiniAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
 
+	// 1) Fetch MiniApp
 	var mini appsv1alpha1.MiniApp
 	if err := r.Get(ctx, req.NamespacedName, &mini); err != nil {
 		if apierrors.IsNotFound(err) {
@@ -41,15 +42,15 @@ func (r *MiniAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 	}
 
 	if mini.Spec.Image == "" {
-		logger.Info("MiniApp spec.image is empty; skipping", "name", mini.Name)
-		return ctrl.Result{}, nil
+		err := fmt.Errorf("MiniApp %s/%s: spec.image is required", mini.Namespace, mini.Name)
+		logger.Error(err, "validation error")
+		return ctrl.Result{}, err
 	}
 
 	var replicas int32 = 1
 	if mini.Spec.Replicas != nil {
 		replicas = *mini.Spec.Replicas
 	}
-
 	var port int32 = 8080
 	if mini.Spec.Port != nil {
 		port = *mini.Spec.Port
