@@ -4,43 +4,31 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" height="60"/>
 </p>
 
-# A tiny Kubebuilder operator that introduces a new CRD `MiniApp` and reconciles it into a Kubernetes `Deployment`.
+# simple-operator — MiniApp
 
-What it does:
-- Watches MiniApp resources and keeps a matching Deployment in sync
-- Deployment name = MiniApp name (same namespace)
-- Required: spec.image (if missing, reconcile returns an error)
+A minimal Kubebuilder + Go Kubernetes Operator that introduces a custom resource MiniApp and reconciles it into a native Kubernetes Deployment.
+
+## What it does
+- Watches MiniApp
+- Creates/updates a matching Deployment
+- spec.image is required (returns error if missing)
 - Defaults: replicas=1, port=8080
-- Sets OwnerReference so deleting MiniApp deletes the Deployment
+- Uses OwnerReference (deleting MiniApp deletes Deployment)
 
-Prereqs:
-- Ubuntu + Kubernetes (k3s/minikube/kind)
-- Go, kubectl, kubebuilder
-(Optional network fix)
-go env -w GOPROXY=https://goproxy.io,direct ; go env -w GOSUMDB=off
+## Run locally
 
-Install & run (local controller):
+```bash
 git clone https://github.com/amirhosssein0/simple-operator.git
 cd simple-operator
 make generate && make manifests
 make install
 make run
+```
 
-Example:
-cat > miniapp.yaml <<'YAML'
-apiVersion: apps.amir.local/v1alpha1
-kind: MiniApp
-metadata:
-  name: hello
-spec:
-  image: nginx:latest
-  replicas: 2
-  port: 80
-YAML
-kubectl apply -f miniapp.yaml
+## Example
+
+```bash
+kubectl apply -f examples/miniapp.yaml
 kubectl get deploy
-kubectl get pods -l app=hello
-
-Cleanup:
-kubectl delete -f miniapp.yaml
-make uninstall
+kubectl get pods
+```
