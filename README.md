@@ -1,1 +1,1 @@
-# simple-oparator
+# simple-operator
