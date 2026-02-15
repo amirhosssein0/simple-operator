@@ -1,9 +1,0 @@
-apiVersion: apps.amir.local/v1alpha1
-kind: MiniApp
-metadata:
-  name: test
-spec:
-  image: 
-  replicas: 2
-  port: 80
-
