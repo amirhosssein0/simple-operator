@@ -1,0 +1,8 @@
+apiVersion: apps.amir.local/v1alpha1
+kind: MiniApp
+metadata:
+  name: hello
+spec:
+  image: nginx:latest
+  replicas: 2
+  port: 80

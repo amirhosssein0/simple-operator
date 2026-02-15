@@ -1,0 +1,9 @@
+apiVersion: apps.amir.local/v1alpha1
+kind: MiniApp
+metadata:
+  labels:
+    app.kubernetes.io/name: simple-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: miniapp-sample
+spec:
+  # TODO(user): Add fields here
