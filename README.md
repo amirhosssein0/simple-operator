@@ -1,4 +1,4 @@
-<p align="center">
+p align="center">
   <img src="https://go.dev/images/go-logo-blue.svg" height="60"/>
   &nbsp;&nbsp;&nbsp;
   <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" height="60"/>
