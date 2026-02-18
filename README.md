@@ -1,7 +1,7 @@
-p align="center">
-  <img src="https://go.dev/images/go-logo-blue.svg" height="60"/>
+<p align="center">
+  <img src="https://go.dev/blog/gopher/header.jpg" height="80"/>
   &nbsp;&nbsp;&nbsp;
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" height="60"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" height="70"/>
 </p>
 
 # simple-operator — MiniApp
