@@ -62,7 +62,7 @@ kubectl apply MiniApp CR
 ## MiniApp Spec
 
 ```yaml
-apiVersion: apps.amirhosssein.dev/v1alpha1
+apiVersion: apps.amir.local/v1alpha1
 kind: MiniApp
 metadata:
   name: my-app
